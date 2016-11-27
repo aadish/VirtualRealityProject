@@ -27,4 +27,9 @@ public class CameraController : MonoBehaviour {
         transform.position += Vector3.forward * delta;
     }
 
+    public Vector3 CameraPosition()
+    {
+        return transform.position;
+    }
+
 }
