@@ -5,7 +5,6 @@ public class CameraController : MonoBehaviour {
     private bool changeSkyDome;
     public Material skyBox;
     public GameController gameController;
-    public GameObject greatFilter;
     // Use this for initialization
     void Start () {
         changeSkyDome = false;
