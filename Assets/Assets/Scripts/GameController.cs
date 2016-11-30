@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public CameraController cameraController;
     public GameObject doorObject;
     public GameObject greatFilter;
+    public GameObject rainbowRoad;
     public GameObject action1Panel;
 
 	// Use this for initialization
@@ -31,7 +32,7 @@ public class GameController : MonoBehaviour {
         }
         if ( moveAhead )
         {
-            cameraController.MoveForward( Time.deltaTime * 4 );
+            cameraController.MoveForward( Time.deltaTime * 8 );
         }
 
         
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour {
     public void addFilter()
     {
         Instantiate(greatFilter, new Vector3(0, -150, 1000), Quaternion.identity);
+        Instantiate(rainbowRoad, new Vector3(0, -5, -10), Quaternion.Euler( 0, 90, 0 ));
     }
 
     public void ResetScene()
