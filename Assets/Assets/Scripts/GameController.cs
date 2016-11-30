@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour {
 
     public void addFilter()
     {
-        Instantiate(greatFilter, new Vector3(0, 0, 1000), Quaternion.identity);
+        Instantiate(greatFilter, new Vector3(0, -150, 1000), Quaternion.identity);
     }
 
     public void ResetScene()
