@@ -20,6 +20,7 @@ public class DoorController : MonoBehaviour {
         if (doorOpen && transform.rotation.eulerAngles.y > doorAngle)
         {
             gameController.MoveAhead();
+            doorOpen = false;
         }
 
         
