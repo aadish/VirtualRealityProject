@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour {
     public GameObject action2Panel;
     public GameObject action3Panel;
 
+    
+
     // Use this for initialization
     void Start () {
         moveAhead = false;
@@ -33,6 +35,10 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*if( GvrViewer.Instance.BackButtonPressed)
+        {
+            Application.Quit();
+        }*/
         cameraPosition = cameraController.CameraPosition();
         
         // instantiate first action panel
