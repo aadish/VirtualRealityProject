@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
     private GameObject instantiatedFilter;
     private Vector3 cameraPosition;
     public CameraController cameraController;
-    public GameObject doorObject;
+    public GameObject roomObject;
     public GameObject greatFilter;
     public GameObject rainbowRoad;
     public GameObject action1Panel;
@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour {
 
     public void removeDoor()
     {
-        Destroy(doorObject);
+        Destroy(roomObject);
     }
 
     public void addFilter()
