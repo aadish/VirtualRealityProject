@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     private bool action2PanelFlag;
     private bool action3PanelFlag;
     private bool moveGreatFilter;
+	private int counter;
     private GameObject instantiatedFilter;
     private Vector3 cameraPosition;
     public CameraController cameraController;
@@ -18,11 +19,13 @@ public class GameController : MonoBehaviour {
     public GameObject action1Panel;
     public GameObject action2Panel;
     public GameObject action3Panel;
+	public GameObject fireLog;
 
     
 
     // Use this for initialization
     void Start () {
+		counter = 0;
         moveAhead = false;
         moveGreatFilter = false;
         action1PanelFlag = true;
@@ -62,12 +65,15 @@ public class GameController : MonoBehaviour {
             moveAhead = false;
             action3PanelFlag = false;
         }
-        if ( moveAhead )
+		if ( moveAhead && counter == 0)
         {
             cameraController.MoveForward( Time.deltaTime * 8 );
             //print ( cameraController.CameraPosition() );
         }
 
+		if ( counter > 0){
+			counter--;
+		}
         if ( moveGreatFilter)
         {
             instantiatedFilter.GetComponent<Transform>().Translate( Vector3.back * Time.deltaTime * 100 );
@@ -101,7 +107,6 @@ public class GameController : MonoBehaviour {
 
     public void ResetScene()
     {
-        print("In Reset");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -109,6 +114,9 @@ public class GameController : MonoBehaviour {
     {
         moveAhead = true;
         action1Panel.SetActive(false);
+		Instantiate(fireLog, new Vector3(0, -1.5f, 67), Quaternion.identity);
+		counter = 200;
+
     }
 
     public void CompleteAction2()
