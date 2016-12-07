@@ -51,10 +51,11 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*if( GvrViewer.Instance.BackButtonPressed)
+        if( GvrViewer.Instance.BackButtonPressed)
         {
-            Application.Quit();
-        }*/
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GvrViewer.Instance.Recenter();
+        }
         cameraPosition = cameraController.CameraPosition();
         
         // instantiate first action panel
