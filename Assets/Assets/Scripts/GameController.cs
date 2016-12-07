@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
     public GameObject scroll;
     public GameObject scrollPile;
     public GameObject spaceShip;
-
+    public GameObject quill;
     
 
     // Use this for initialization
@@ -169,6 +169,7 @@ public class GameController : MonoBehaviour {
         action2Panel.SetActive(false);
         instantiatedScroll = (GameObject)Instantiate(scroll);
         Instantiate(scrollPile);
+        Instantiate(quill);
         counter = 200;
         animateScroll = true;
     }
