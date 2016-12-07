@@ -10,9 +10,12 @@ public class GameController : MonoBehaviour {
     private bool action3PanelFlag;
     private bool moveGreatFilter;
     private bool animateScroll;
+    private bool animateSpaceship;
+    private bool endGameFlag;
 	private int counter;
     private GameObject instantiatedFilter;
     private GameObject instantiatedScroll;
+    private GameObject instantiatedSpaceShip;
     private Vector3 cameraPosition;
     public CameraController cameraController;
     public GameObject roomObject;
@@ -21,9 +24,11 @@ public class GameController : MonoBehaviour {
     public GameObject action1Panel;
     public GameObject action2Panel;
     public GameObject action3Panel;
+    public GameObject endMessage;
 	public GameObject fireLog;
     public GameObject scroll;
     public GameObject scrollPile;
+    public GameObject spaceShip;
 
     
 
@@ -36,9 +41,12 @@ public class GameController : MonoBehaviour {
         action2PanelFlag = true;
         action3PanelFlag = true;
         animateScroll = false;
+        animateSpaceship = false;
+        endGameFlag = false;
         action1Panel.SetActive(false);
         action2Panel.SetActive(false);
         action3Panel.SetActive(false);
+        endMessage.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -70,21 +78,33 @@ public class GameController : MonoBehaviour {
             moveAhead = false;
             action3PanelFlag = false;
         }
-		if ( moveAhead && counter == 0)
+        // check for the end of game
+        if (cameraPosition.z > 850 && !endGameFlag)
         {
-            cameraController.MoveForward( Time.deltaTime * 8 );
-            //print ( cameraController.CameraPosition() );
+            moveAhead = false;
+            endGameFlag = true;
+        }
+        if ( moveAhead && counter == 0)
+        {
+            cameraController.MoveForward( Time.deltaTime * 12 );
         }
 
         // animate the scroll
         if ( animateScroll && instantiatedScroll.GetComponent<Transform>().eulerAngles.x > 5)
         {
             instantiatedScroll.GetComponent<Transform>().eulerAngles -= new Vector3(0.5f, 0, 0);
-        } 
+        }
 
-		if ( counter > 0){
+        // animate spaceship
+        if (animateSpaceship && instantiatedSpaceShip.GetComponent<Transform>().position.z < 4000 && counter < 200 )
+        {
+            instantiatedSpaceShip.GetComponent<Transform>().position += Vector3.forward * Time.deltaTime * 32;
+        }
+        if ( counter > 0){
 			counter--;
 		}
+
+        // crush from filter
         if ( moveGreatFilter)
         {
             instantiatedFilter.GetComponent<Transform>().Translate( Vector3.back * Time.deltaTime * 100 );
@@ -96,9 +116,22 @@ public class GameController : MonoBehaviour {
             }
         }
 
-        
-	
-	}
+        // end the game dialog
+        if (endGameFlag)
+        {
+            
+            instantiatedFilter.GetComponent<Transform>().Translate(new Vector3( 0, Time.deltaTime * -10, 0) );
+            if (instantiatedFilter.GetComponent<Transform>().position.y < -260)
+            {
+
+                endGameFlag= false;
+                endMessage.SetActive(true);
+            }
+        }
+
+
+
+    }
 
     public void MoveAhead()
     {
@@ -144,6 +177,9 @@ public class GameController : MonoBehaviour {
     {
         moveAhead = true;
         action3Panel.SetActive(false);
+        instantiatedSpaceShip =  (GameObject)Instantiate(spaceShip);
+        counter = 300;
+        animateSpaceship = true;
     }
 
     public void PassAction1()
