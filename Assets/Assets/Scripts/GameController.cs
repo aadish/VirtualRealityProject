@@ -9,8 +9,10 @@ public class GameController : MonoBehaviour {
     private bool action2PanelFlag;
     private bool action3PanelFlag;
     private bool moveGreatFilter;
+    private bool animateScroll;
 	private int counter;
     private GameObject instantiatedFilter;
+    private GameObject instantiatedScroll;
     private Vector3 cameraPosition;
     public CameraController cameraController;
     public GameObject roomObject;
@@ -20,6 +22,8 @@ public class GameController : MonoBehaviour {
     public GameObject action2Panel;
     public GameObject action3Panel;
 	public GameObject fireLog;
+    public GameObject scroll;
+    public GameObject scrollPile;
 
     
 
@@ -31,6 +35,7 @@ public class GameController : MonoBehaviour {
         action1PanelFlag = true;
         action2PanelFlag = true;
         action3PanelFlag = true;
+        animateScroll = false;
         action1Panel.SetActive(false);
         action2Panel.SetActive(false);
         action3Panel.SetActive(false);
@@ -70,6 +75,12 @@ public class GameController : MonoBehaviour {
             cameraController.MoveForward( Time.deltaTime * 8 );
             //print ( cameraController.CameraPosition() );
         }
+
+        // animate the scroll
+        if ( animateScroll && instantiatedScroll.GetComponent<Transform>().eulerAngles.x > 5)
+        {
+            instantiatedScroll.GetComponent<Transform>().eulerAngles -= new Vector3(0.5f, 0, 0);
+        } 
 
 		if ( counter > 0){
 			counter--;
@@ -123,7 +134,12 @@ public class GameController : MonoBehaviour {
     {
         moveAhead = true;
         action2Panel.SetActive(false);
+        instantiatedScroll = (GameObject)Instantiate(scroll);
+        Instantiate(scrollPile);
+        counter = 200;
+        animateScroll = true;
     }
+
     public void CompleteAction3()
     {
         moveAhead = true;
