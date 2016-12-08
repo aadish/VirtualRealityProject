@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
     public GameObject scrollPile;
     public GameObject spaceShip;
     public GameObject quill;
-    
+    public GameObject earth;
 
     // Use this for initialization
     void Start () {
@@ -84,6 +84,7 @@ public class GameController : MonoBehaviour {
         {
             moveAhead = false;
             endGameFlag = true;
+            Instantiate(earth);
         }
         if ( moveAhead && counter == 0)
         {
@@ -160,7 +161,7 @@ public class GameController : MonoBehaviour {
         moveAhead = true;
         action1Panel.SetActive(false);
 		Instantiate(fireLog, new Vector3(0, -1.5f, 67), Quaternion.identity);
-		counter = 200;
+		counter = 300;
 
     }
 
@@ -171,7 +172,7 @@ public class GameController : MonoBehaviour {
         instantiatedScroll = (GameObject)Instantiate(scroll);
         Instantiate(scrollPile);
         Instantiate(quill);
-        counter = 200;
+        counter = 300;
         animateScroll = true;
     }
 
