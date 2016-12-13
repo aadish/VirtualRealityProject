@@ -61,6 +61,7 @@ public class GameController : MonoBehaviour {
         // instantiate first action panel
         if ( cameraPosition.z > 60 && cameraPosition.z < 80 && action1PanelFlag )
         {
+            GvrViewer.Instance.Recenter();
             action1Panel.SetActive(true);
             moveAhead = false;
             action1PanelFlag = false;
@@ -68,6 +69,7 @@ public class GameController : MonoBehaviour {
         // instantiate second action panel
         if (cameraPosition.z > 330 && cameraPosition.z < 350 && action2PanelFlag)
         {
+            GvrViewer.Instance.Recenter();
             action2Panel.SetActive(true);
             moveAhead = false;
             action2PanelFlag = false;
@@ -75,6 +77,7 @@ public class GameController : MonoBehaviour {
         // instantiate third action panel
         if (cameraPosition.z > 590 && cameraPosition.z < 610 && action3PanelFlag)
         {
+            GvrViewer.Instance.Recenter();
             action3Panel.SetActive(true);
             moveAhead = false;
             action3PanelFlag = false;
@@ -82,13 +85,14 @@ public class GameController : MonoBehaviour {
         // check for the end of game
         if (cameraPosition.z > 850 && !endGameFlag)
         {
+            GvrViewer.Instance.Recenter();
             moveAhead = false;
             endGameFlag = true;
             Instantiate(earth);
         }
         if ( moveAhead && counter == 0)
         {
-            cameraController.MoveForward( Time.deltaTime * 12 );
+            cameraController.MoveForward( Time.deltaTime * 16 );
         }
 
         // animate the scroll
